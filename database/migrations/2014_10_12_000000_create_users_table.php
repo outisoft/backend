@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('apePat');
+            $table->string('apeMat');
             $table->string('email')->unique();
             $table->string('rol')->unique();
             $table->string('adscripcion')->unique();

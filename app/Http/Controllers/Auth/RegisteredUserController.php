@@ -41,9 +41,15 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'apePat' => $request->apePat,
+            'apeMat' => $request->apeMat,
+            'rol' => '2',
+            'adscripcion'=>'Usuarioo',
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        $user->roles()->sync([ $roleuser->id ]);
 
         event(new Registered($user));
 

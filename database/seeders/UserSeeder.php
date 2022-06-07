@@ -33,6 +33,8 @@ class UserSeeder extends Seeder
         }
         $useradmin= User::create([
             'name'      => 'admin',
+            'apePat'      => 'admin',
+            'apeMat'      => 'admin',
             'email'     => 'admin@admin.com',
             'rol'       => 'Admin',
             'adscripcion'=> 'Administrador',

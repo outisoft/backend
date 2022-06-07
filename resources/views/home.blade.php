@@ -78,9 +78,9 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                <form class="d-none d-md-flex ms-4">
+                <!--form class="d-none d-md-flex ms-4">
                     <input class="form-control border-0" type="search" placeholder="Search">
-                </form>
+                </form-->
                 <div class="navbar-nav align-items-center ms-auto">
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -185,8 +185,8 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total de casas</p>
-                                <h6 class="mb-0">357</h6>
+                                <p class="mb-2">Citas</p>
+                                <h6 class="mb-0">37</h6>
                             </div>
                         </div>
                     </div>
@@ -224,51 +224,20 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($users as $user)
                                 <tr>
                                     <!--td><input class="form-check-input" type="checkbox"></td-->
-                                    <td>Jorge Antonio</td>
-                                    <td>Cruz</td>
-                                    <td>Bartolon</td>
-                                    <td>jorge@gmail.com</td>
-                                    <td>Administrador</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->apePat }}</td>
+                                    <td>{{ $user->apeMat }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        @isset($user->roles[0]->name)
+                                            {{ $user->roles[0]->name}}
+                                        @endisset</td>
+                                    <td><a class="btn btn-sm btn-primary" href="#">Detail</a></td>
                                 </tr>
-                                <tr>
-                                    <!--td><input class="form-check-input" type="checkbox"></td-->
-                                    <td>Jonathan</td>
-                                    <td>Velazquez</td>
-                                    <td>Trinidad</td>
-                                    <td>jove@hotmail.com</td>
-                                    <td>User</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <!--td><input class="form-check-input" type="checkbox"></td-->
-                                    <td>Cesar Alejandro</td>
-                                    <td>Mesa</td>
-                                    <td>Perez</td>
-                                    <td>cape@outlook.com</td>
-                                    <td>User</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <!--td><input class="form-check-input" type="checkbox"></td-->
-                                    <td>Delia Kahory</td>
-                                    <td>Lopez</td>
-                                    <td>Ramos</td>
-                                    <td>lord@gmail.com</td>
-                                    <td>User</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <!--td><input class="form-check-input" type="checkbox"></td-->
-                                    <td>Diana</td>
-                                    <td>Hernandez</td>
-                                    <td>Lopez</td>
-                                    <td>diana@hotmail.com</td>
-                                    <td>User</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
+                                @endforeach                                
                             </tbody>
                         </table>
                     </div>

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Models\User;
+use App\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +25,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::get('/home', function () {
-    return view('home');
+    $users =  User::with('roles')->orderBy('id','Desc')->paginate(10);
+    return view('home',compact('users'));
 })->middleware(['auth'])->name('home');
 
+Route::middleware(['auth:sanctum', 'verified'])->resource('/user', 'App\Http\Controllers\UserController', ['except'=>['create','store']])->names('user');
 require __DIR__.'/auth.php';
