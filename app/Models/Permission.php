@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-    protected $fillable = [
-        'name', 'slug', 'description',
-    ];
+    use HasFactory;
 
-    public function roles()
-    {
-        return $this->belongsToMany('App\Models\Role')->withTimesTamps();
-    }
+    protected $fillable = [
+        'title',
+      ];
+
+      public function roles()
+      {
+        return $this->belongsToMany(Role::class);
+      }
 }

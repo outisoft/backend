@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('apePat');
             $table->string('apeMat');
             $table->string('email')->unique();
-            $table->string('rol')->unique();
-            $table->string('adscripcion')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

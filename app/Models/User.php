@@ -30,8 +30,6 @@ class User extends Authenticatable
         'apePat',
         'apeMat',
         'email',
-        'rol',
-        'adscripcion',
         'profile_photo_path',
         'password',
     ];
