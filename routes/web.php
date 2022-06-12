@@ -29,5 +29,16 @@ Route::get('/home', function () {
     return view('home',compact('users'));
 })->middleware(['auth'])->name('home');
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('tasks', \App\Http\Controllers\TasksController::class);
+
+    Route::resource('users', \App\Http\Controllers\UsersController::class);
+
+    Route::resource('propiedad', \App\Http\Controllers\PropiedadController::class);
+});
+
 Route::middleware(['auth:sanctum', 'verified'])->resource('/user', 'App\Http\Controllers\UserController', ['except'=>['create','store']])->names('user');
+
+
+/*Route::middleware(['auth:sanctum', 'verified'])->resource('/propiedad', 'App\Http\Controllers\PropiedadController')->names('propiedad');*/
 require __DIR__.'/auth.php';
