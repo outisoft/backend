@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light rounded-top p-3">
-        <form method="POST" action="{{ route('propiedad.store') }}">
+        <form method="POST" action="{{ route('propiedad.store') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
             <h6 class="mb-4">Floating Label</h6>
             <div class="form-floating mb-3">
@@ -79,6 +79,10 @@
                     <option value="3">Cuarto</option>
                 </select>
                 <label for="floatingSelect">Tipo</label>
+            </div>
+            <div class="mb-3">
+                <label for="formFileSm" class="form-label">Imagen 1</label>
+                <input name="img1" class="form-control form-control-sm" id="img1" type="file">
             </div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>

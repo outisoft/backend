@@ -23,6 +23,7 @@ class CreatePropiedadesTable extends Migration
             $table->integer('beds');
             $table->integer('baths');
             $table->string('tipo');
+            $table->string('img1');
             $table->timestamps();
         });
     }

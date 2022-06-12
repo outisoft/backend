@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Propiedad;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/home', function () {
     $users =  User::with('roles')->orderBy('id','Desc')->paginate(10);
-    return view('home',compact('users'));
+    $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
+    return view('home',compact('users', 'Propiedades'));
 })->middleware(['auth'])->name('home');
 
 Route::group(['middleware' => 'auth'], function () {

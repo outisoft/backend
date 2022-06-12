@@ -47,6 +47,14 @@ class PropiedadController extends Controller
             'tipo' => 'required',
           ]);
           $propiedad = new Propiedad();
+          
+          if($request->hasFile('img1')){
+              $file = $request->file('img1');
+              $destinationPath = 'images/propiedad/';
+              $filename = time();
+              $uploadimage = $request->file('img1')->move($destinationPath, $filename);
+              $propiedad->img1 = $destinationPath . $filename;
+          }
 
           //dd($validatedData);
   
