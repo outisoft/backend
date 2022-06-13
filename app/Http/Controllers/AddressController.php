@@ -36,7 +36,32 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         //dd($request);
+         $validatedData = $request->validate([
+            'streetName'      => 'required',
+            'streetNumber'    => 'required',
+            'neighborhood'    => 'required',
+            'zipCode'     => 'required',
+            'reference'    => 'required',
+            'country'    => 'required',
+            'state' => 'required',
+            'city' => 'required',
+          ]);
+          $address = new Address();
+
+          //dd($validatedData);
+  
+          $address->streetName = $request->streetName;
+          $address->streetNumber = $request->streetNumber;
+          $address->neighborhood = $request->neighborhood;
+          $address->zipCode = $request->zipCode;
+          $address->reference = $request->reference;
+          $address->country = $request->country;
+          $address->state = $request->state;
+          $address->city = $request->city;
+  
+          $address->save();
+          return redirect()->route('address.index')->with('status_success','Direccion agregada');
     }
 
     /**
