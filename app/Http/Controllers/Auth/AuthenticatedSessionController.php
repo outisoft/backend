@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use App\Models\Propiedad;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
@@ -33,7 +34,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         //return redirect()->intended(RouteServiceProvider::HOME);
-        return redirect()->route('home');
+        $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
+        return redirect()->route('home', compact('propiedades'));
     }
 
     /**

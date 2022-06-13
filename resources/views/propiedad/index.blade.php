@@ -9,6 +9,9 @@
             </div>
 
             <div class="col-12 col-sm-6 text-center text-sm-end">
+                <a href="{{ url('address') }}" class="btn btn-square btn-primary m-2">
+                    <i class="bi bi-geo-alt"></i>
+                </a>
                 <a href="{{ route('propiedad.create') }}" class="btn btn-square btn-primary m-2">
                     <i class="fa fa-plus"></i>
                 </a>
@@ -39,6 +42,19 @@
                                             <i class="fas fa-bath mx-2 aling-self-center"></i>
                                             <span>{{ $propiedad->baths }}</span>
                                         </div>
+                                    </div>
+                                    <div class="item d-flex aling-self-center">
+                                        <a class="btn btn-sm btn-sucses" href="{{ route('propiedad.edit', $propiedad->id) }}">
+                                            <i class="fas fa-pen mx-2 aling-self-center"></i>
+                                            <span class="mr-3">Edit</span>
+                                        </a>
+                                        
+
+                                        <form class="btn btn-sm btn-sucses" action="{{ route('propiedad.destroy', $propiedad->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <button class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="right" title="Delete"><span class="fas fa-trash mx-2 aling-self-center"></span></button>
+                                        </form>
                                     </div>
                                 </div> 
                             </div>

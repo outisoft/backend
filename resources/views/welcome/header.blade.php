@@ -32,7 +32,7 @@
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link active" href="/">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Sales</a>
@@ -52,6 +52,10 @@
         <!-- Collapsible wrapper -->
 
         <!-- Right elements -->
+        
+            
+        @if (Route::has('login'))
+        @auth
         <div class="d-flex align-items-center">
             <!-- Icon -->
             <a class="text-reset me-3" href="#">
@@ -104,28 +108,32 @@
                 loading="lazy"
                 />
             </a>
-            <ul
-                class="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdownMenuAvatar"
-            >
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                 <li>
-                <a class="dropdown-item" href="#">My profile</a>
+                    <a class="dropdown-item" href="#">My profile</a>
                 </li>
                 <li>
-                <a class="dropdown-item" href="#">Settings</a>
+                    <a class="dropdown-item" href="#">Settings</a>
                 </li>
                 <li>
-                <a class="dropdown-item" href="#">Logout</a>
+                    <a class="dropdown-item" href="#">Logout</a>
                 </li>
             </ul>
             
             </div>
+            @else
             <div>
-            <li class="nav-item">
-                <button class="btn btn-theme">Get Started</button>
-            </li>
+                <li class="nav-item">
+                    <a href="{{ route('login') }}" class="btn btn-theme">Login</a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="btn btn-theme">Register</a>
+                    @endif
+                </li>
             </div>
+            
         </div>
+            @endauth
+        @endif
         <!-- Right elements -->
         </div>
         <!-- Container wrapper -->

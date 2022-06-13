@@ -18,7 +18,8 @@ use App\Models\Propiedad;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
+    return view('welcome', compact('propiedades'));
 });
 
 Route::get('/dashboard', function () {
@@ -27,8 +28,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/home', function () {
     $users =  User::with('roles')->orderBy('id','Desc')->paginate(10);
-    $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
-    return view('home',compact('users', 'Propiedades'));
+    return view('home',compact('users'));
 })->middleware(['auth'])->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users', \App\Http\Controllers\UsersController::class);
 
     Route::resource('propiedad', \App\Http\Controllers\PropiedadController::class);
+
+    Route::resource('address', \App\Http\Controllers\AddressController::class);
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->resource('/user', 'App\Http\Controllers\UserController', ['except'=>['create','store']])->names('user');
