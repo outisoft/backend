@@ -72,7 +72,8 @@ class AddressController extends Controller
      */
     public function show(Address $address)
     {
-        //
+        return view('address.show', compact('address'));
+        //return view('propiedad.show', compact('propiedad'));
     }
 
     /**
@@ -83,7 +84,7 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        //
+        return view('address.edit', compact('address'));
     }
 
     /**
@@ -95,7 +96,20 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        $validatedData = $request->validate([
+            'streetName'      => 'required',
+            'streetNumber'    => 'required',
+            'neighborhood'    => 'required',
+            'zipCode'     => 'required',
+            'reference'    => 'required',
+            'country'    => 'required',
+            'state' => 'required',
+            'city' => 'required',
+          ]);
+          //dd($bautismo);
+          $address->update($request->all());
+  
+          return redirect()->route('address.index')->with('status_success','Direccion actualizada correctamente');
     }
 
     /**

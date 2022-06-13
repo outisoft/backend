@@ -41,7 +41,6 @@
                             <td>{{ $address->state }}</td>
                             <td>{{ $address->city }}</td>
                             <td>
-                                <a href="{{ route('address.show', $address->id) }}" class="btn btn-sm btn-primary">View</a>
                                 <a href="{{ route('address.edit', $address->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                 <form class="btn btn-sm btn-danger" action="{{ route('address.destroy', $address->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                     <input type="hidden" name="_method" value="DELETE">
