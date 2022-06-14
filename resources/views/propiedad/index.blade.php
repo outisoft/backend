@@ -34,7 +34,8 @@
                                     <div class="d-flex justify-content-between mb-4">
                                         <div class="item">
                                         <h4 class="h5 m-0">{{ $propiedad->name }}</h4>
-                                        <p class="m-0">{{ $propiedad->address_id }}</p>
+
+
                                         </div>
                                         <div class="item d-flex aling-self-center">
                                             <i class="fas fa-bed mx-2 aling-self-center"></i>

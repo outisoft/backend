@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Propiedad;
+use App\Models\Address;
 use Illuminate\Http\Request;
 
 class PropiedadController extends Controller
@@ -15,7 +16,8 @@ class PropiedadController extends Controller
     public function index()
     {
         $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
-        return view('propiedad.index', compact('propiedades'));
+        $address = Address::orderBy('id','Desc')->paginate(20);
+        return view('propiedad.index', compact('propiedades', 'address'));
     }
 
     /**
@@ -25,7 +27,8 @@ class PropiedadController extends Controller
      */
     public function create()
     {
-        return view('propiedad.create');
+        $address = Address::pluck('streetName', 'id');
+        return view('propiedad.create', compact('address'));
     }
 
     /**
@@ -61,7 +64,7 @@ class PropiedadController extends Controller
           $propiedad->name = $request->name;
           $propiedad->description = $request->description;
           $propiedad->price = $request->price;
-          $propiedad->address_id = $request->address_id;
+          $propiedad->address_id = (int)  $request->input('address_id', []);
           $propiedad->rooms = $request->rooms;
           $propiedad->beds = $request->beds;
           $propiedad->baths = $request->baths;

@@ -22,15 +22,17 @@
                 <label for="floatingInput">Price</label>
             </div>
             <div class="form-floating mb-3">
-                <select name="address_id" class="form-select" id="address_id"
+                <select name="address_id[]" class="form-select" id="address_id"
                     aria-label="Floating label select example">
-                    <option selected>Address</option>
-                    <option value="1">Address #1</option>
-                    <option value="2">Address #2</option>
-                    <option value="3">Address #3</option>
+
+                    @foreach($address as $id => $direccion)
+                        <option value="{{ $id }}"{{ in_array($id, old('address_id', [])) ? ' selected' : '' }}>{{ $direccion }}</option>
+                    @endforeach
                 </select>
                 <label for="floatingSelect">Address</label>
             </div>
+
+
             <div class="form-floating mb-3">
                 <select name="rooms" class="form-select" id="rooms"
                     aria-label="Floating label select example">
