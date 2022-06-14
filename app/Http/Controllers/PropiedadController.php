@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Propiedad;
 use App\Models\Address;
+use App\Models\Tipo;
 use Illuminate\Http\Request;
 
 class PropiedadController extends Controller
@@ -17,7 +18,8 @@ class PropiedadController extends Controller
     {
         $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
         $address = Address::orderBy('id','Desc')->paginate(20);
-        return view('propiedad.index', compact('propiedades', 'address'));
+        $tipos = Tipo::orderBy('id','Desc')->paginate(20);
+        return view('propiedad.index', compact('propiedades', 'address', 'tipos'));
     }
 
     /**
@@ -28,7 +30,8 @@ class PropiedadController extends Controller
     public function create()
     {
         $address = Address::pluck('streetName', 'id');
-        return view('propiedad.create', compact('address'));
+        $tipos = Tipo::orderBy('id','Desc')->paginate(20);
+        return view('propiedad.create', compact('address', 'tipos'));
     }
 
     /**
@@ -64,11 +67,12 @@ class PropiedadController extends Controller
           $propiedad->name = $request->name;
           $propiedad->description = $request->description;
           $propiedad->price = $request->price;
-          $propiedad->address_id = (int)  $request->input('address_id', []);
+          $propiedad->address_id = (int)  $request->address_id;
           $propiedad->rooms = $request->rooms;
           $propiedad->beds = $request->beds;
           $propiedad->baths = $request->baths;
-          $propiedad->tipo = $request->tipo;
+          $propiedad->tipo = (int) $request->tipo;
+          
   
           $propiedad->save();
           return redirect()->route('propiedad.index')->with('status_success','Propiedad agregada');
@@ -93,7 +97,9 @@ class PropiedadController extends Controller
      */
     public function edit(Propiedad $propiedad)
     {
-        return view('propiedad.edit', compact('propiedad'));
+        $address = Address::pluck('streetName', 'id');
+        $tipos = Tipo::pluck('name', 'id');
+        return view('propiedad.edit', compact('propiedad', 'address', 'tipos'));
     }
 
     /**
@@ -114,8 +120,21 @@ class PropiedadController extends Controller
             'baths'    => 'required',
             'tipo' => 'required',
           ]);
-          //dd($bautismo);
-          $propiedad->update($request->all());
+          //dd($propiedad);
+
+          $propiedad->name = $request->name;
+          $propiedad->description = $request->description;
+          $propiedad->price = $request->price;
+          $propiedad->address_id = (int)  $request->address_id;
+          $propiedad->rooms = $request->rooms;
+          $propiedad->beds = $request->beds;
+          $propiedad->baths = $request->baths;
+          $propiedad->tipo = (int) $request->tipo;
+
+          dd($propiedad);
+
+          $propiedad->update();
+          
   
           return redirect()->route('propiedad.index')->with('status_success','Propiedad actualizada correctamente');
     }

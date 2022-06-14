@@ -44,20 +44,21 @@
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
+
                         <div class="form-floating mb-3">
-                            <select name="address_id" class="form-select" id="address_id"
-                                aria-label="Floating label select example">
-                                <option selected>Address</option>
-                                <option value="1">Address #1</option>
-                                <option value="2">Address #2</option>
-                                <option value="3">Address #3</option>
+                            <select name="address_id[]" class="form-select" id="address_id"
+                                aria-label="Floating label select example" value="{{ old('address_id', $propiedad->address_id) }}">
+
+                                @foreach($address as $id => $direccion)
+                                    <option value="{{ $id }}"{{ in_array($id, old('address', [])) ? ' selected' : '' }}>{{ $direccion }}</option>
+                                @endforeach
                             </select>
                             <label for="floatingSelect">Address</label>
-                        </div>
+                        </div>                        
                         <div class="form-floating mb-3">
                             <select name="rooms" class="form-select" id="rooms"
-                                aria-label="Floating label select example">
-                                <option selected>Rooms</option>
+                                 value="{{ old('rooms', $propiedad->rooms) }}">
+                                <option selected>{{ old('rooms', $propiedad->rooms) }}</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -70,7 +71,7 @@
                         <div class="form-floating mb-3">
                             <select name="beds" class="form-select" id="beds"
                                 aria-label="Floating label select example">
-                                <option selected>Beds</option>
+                                <option selected>{{ old('beds', $propiedad->beds) }}</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -83,7 +84,7 @@
                         <div class="form-floating mb-3">
                             <select name="baths" class="form-select" id="baths"
                                 aria-label="Floating label select example">
-                                <option selected>Baths</option>
+                                <option selected>{{ old('baths', $propiedad->baths) }}</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -94,12 +95,11 @@
                             <label for="floatingSelect">Baths</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select name="tipo" class="form-select" id="tipo"
-                                aria-label="Floating label select example">
-                                <option selected>Tipo</option>
-                                <option value="1">Casa</option>
-                                <option value="2">Apartamento</option>
-                                <option value="3">Cuarto</option>
+                            <select name="tipo[]" class="form-select" id="tipo"
+                                aria-label="Floating label select example" value="{{ old('tipo', $propiedad->tipo) }}">
+                                @foreach($tipos as $id => $tipo)
+                                    <option value="{{ $id }}"{{ in_array($id, old('tipos', [])) ? ' selected' : '' }}>{{ $tipo }}</option>
+                                @endforeach
                             </select>
                             <label for="floatingSelect">Tipo</label>
                         </div>

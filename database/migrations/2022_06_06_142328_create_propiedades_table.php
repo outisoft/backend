@@ -22,7 +22,7 @@ class CreatePropiedadesTable extends Migration
             $table->integer('rooms');
             $table->integer('beds');
             $table->integer('baths');
-            $table->string('tipo');
+            $table->foreignId('tipo')->references('id')->on('tipo')->onDelete('cascade');
             $table->string('img1');
             $table->timestamps();
         });
