@@ -131,7 +131,7 @@ class PropiedadController extends Controller
           $propiedad->baths = $request->baths;
           $propiedad->tipo = (int) $request->tipo;
 
-          dd($propiedad);
+          //dd($propiedad);
 
           $propiedad->update();
           

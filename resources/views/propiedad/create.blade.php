@@ -77,7 +77,7 @@
                 <select name="tipo[]" class="form-select" id="tipo"
                     aria-label="Floating label select example">
                     <option selected>Tipo</option>
-                    @foreach($tipos as $id => $tipo)
+                    @foreach($tipos as $tipo)
                         <option value="{{ $id }}"{{ in_array($id, old('tipos', [])) ? ' selected' : '' }}>{{ $tipo->name }}</option>
                     @endforeach
                 </select>

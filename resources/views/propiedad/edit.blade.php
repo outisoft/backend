@@ -48,9 +48,10 @@
                         <div class="form-floating mb-3">
                             <select name="address_id[]" class="form-select" id="address_id"
                                 aria-label="Floating label select example" value="{{ old('address_id', $propiedad->address_id) }}">
-
+                                    
                                 @foreach($address as $id => $direccion)
-                                    <option value="{{ $id }}"{{ in_array($id, old('address', [])) ? ' selected' : '' }}>{{ $direccion }}</option>
+                                    <option value="{{ $id }}"{{ in_array($id, old('address', $propiedad->address->pluck('id')->toArray())) ? ' selected' : '' }}>{{ $direccion }}</option>
+                                    
                                 @endforeach
                             </select>
                             <label for="floatingSelect">Address</label>
@@ -95,7 +96,7 @@
                             <label for="floatingSelect">Baths</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select name="tipo[]" class="form-select" id="tipo"
+                            <select name="tipo" class="form-select" id="tipo"
                                 aria-label="Floating label select example" value="{{ old('tipo', $propiedad->tipo) }}">
                                 @foreach($tipos as $id => $tipo)
                                     <option value="{{ $id }}"{{ in_array($id, old('tipos', [])) ? ' selected' : '' }}>{{ $tipo }}</option>
