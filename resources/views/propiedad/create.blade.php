@@ -5,7 +5,7 @@
     <div class="bg-light rounded-top p-3">
         <form method="POST" action="{{ route('propiedad.store') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
-            <h6 class="mb-4">Floating Label</h6>
+            <h6 class="mb-4">Agregar una propiedad</h6>
             <div class="form-floating mb-3">
                 <input name="name" type="text" class="form-control" id="name"
                     placeholder="Juan Perez">

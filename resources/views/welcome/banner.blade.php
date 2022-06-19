@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-md-5 my-auto mr-auto me-auto">
             <h1 class="h1 h1-responsive">Grupo Inmobiliario JM S.A. de C.V.</h1>
+            <h6 class="h6 color-primary m-0">Vision</h6>
             <p>Nuestra visión es ser un Grupo inmobiliario y de servicios líder en Chiapas, 
                 y en continuo crecimiento, que se distinga por proporcionar una calidad de servicio 
                 excelente a nuestros clientes, ofreciendo servicios personalizados sobre la base de la 

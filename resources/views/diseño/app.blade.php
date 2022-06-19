@@ -30,6 +30,7 @@
     <!-- Template Stylesheet -->
     <link href="{{ asset('css/style.css')}}" rel="stylesheet">
     <link href="{{ asset('css/style2.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 </head>
 
 <body>
