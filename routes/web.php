@@ -22,9 +22,9 @@ Route::get('/', function () {
     return view('welcome', compact('propiedades'));
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/welcome', function () {
+    return view('welcome');
+})->middleware(['auth'])->name('welcome');
 
 Route::get('/home', function () {
     $users =  User::with('roles')->orderBy('id','Desc')->paginate(10);

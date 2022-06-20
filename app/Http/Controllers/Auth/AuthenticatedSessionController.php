@@ -7,7 +7,10 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Models\Propiedad;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -33,9 +36,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        //dd($request);
+
         //return redirect()->intended(RouteServiceProvider::HOME);
         $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
-        return redirect()->route('home', compact('propiedades'));
+
+        $users = DB::table('users')->get();
+        if($users->id == '1'){
+            return redirect()->route('home', compact('propiedades'));
+        }
+        return redirect()->route('welcome', compact('propiedades'));
+
+        
     }
 
     /**

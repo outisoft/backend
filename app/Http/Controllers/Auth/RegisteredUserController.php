@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Propiedad;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -33,6 +34,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -43,18 +45,21 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'apePat' => $request->apePat,
             'apeMat' => $request->apeMat,
-            'rol' => '2',
-            'adscripcion'=>'Usuarioo',
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        //dd($request);
 
-        $user->roles()->sync([ $roleuser->id ]);
-
+        //$user->roles()->sync([ $roleuser->id ]);
+        
         event(new Registered($user));
-
+        User::findOrFail(2)->roles()->sync($user->id);
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
+        return view('welcome', compact('propiedades'));
+
+        //$propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
+        //return view('welcome', compact('propiedades'));
     }
 }
