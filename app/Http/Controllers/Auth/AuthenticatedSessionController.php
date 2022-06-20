@@ -41,8 +41,8 @@ class AuthenticatedSessionController extends Controller
         //return redirect()->intended(RouteServiceProvider::HOME);
         $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
 
-        $users = DB::table('users')->get();
-        if($users->id == '1'){
+        //$users = DB::table('users')->get();
+        if($request->id == '1'){
             return redirect()->route('home', compact('propiedades'));
         }
         return redirect()->route('welcome', compact('propiedades'));
