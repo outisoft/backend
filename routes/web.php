@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Propiedad;
+use App\Models\Address;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,11 @@ use App\Models\Propiedad;
 */
 
 Route::get('/', function () {
-    $propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
+    //User::with(['company', 'employee.department', 'employee.gradelevel'])->get();
+    //$propiedades = Propiedad::with(['address', 'address.state', 'address.city'])->get();
+    //$propiedades = Propiedad::orderBy('id','Desc')->paginate(20);
+    //$users = User::with('roles')->get();
+    $propiedades = Propiedad::with('address')->get();
     return view('welcome', compact('propiedades'));
 });
 

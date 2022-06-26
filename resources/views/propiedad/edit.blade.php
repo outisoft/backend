@@ -1,9 +1,10 @@
 @extends('diseño.app')
 @section('content')
 <div class="container-fluid pt-4 px-4">
+    @include('custom.message')
     <div class="bg-light rounded-top p-4">
         <div class="row">
-            <form method="post" action="{{ route('propiedad.update', $propiedad->id) }}">
+            <form method="post" action="{{ route('propiedad.update', $propiedad->id) }}" enctype="multipart/form-data">
             @csrf
             @method('put')
                 <div class="col-12 col-sm-6 text-center text-sm-start">
@@ -13,6 +14,8 @@
                         <div class="image">
                             <img src="{{ asset($propiedad->img1)}}" alt="{{ $propiedad->title }}" class="img-fluid image-thumbnail">
                         </div>
+                        <label for="formFileSm" class="form-label">Img</label>
+                        <input name="img1" class="form-control form-control-sm" id="img1" type="file">
                     </div>
                 </div>
                 
@@ -46,12 +49,13 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <select name="address_id" class="form-select" id="address_id"
-                                aria-label="Floating label select example" value="{{ old('address_id', $propiedad->address_id) }}">
+                            <select name="address[]" class="form-select" id="address"
+                                aria-label="Floating label select example">
                                     
                                 @foreach($address as $id => $direccion)
-                                    <option value="{{ $id }}"{{ in_array($id, old('address', [])) ? ' selected' : '' }}>{{ $direccion }}</option>
-                                    
+                                    <option value="{{ $id }}"{{ in_array($id, old('address', $propiedad->address->pluck('id')->toArray())) ? ' selected' : '' }}>
+                                        {{ $direccion }}
+                                    </option>
                                 @endforeach
                             </select>
                             <label for="floatingSelect">Address</label>
@@ -96,10 +100,12 @@
                             <label for="floatingSelect">Baths</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select name="tipo" class="form-select" id="tipo"
-                                aria-label="Floating label select example" value="{{ old('tipo', $propiedad->tipo) }}">
+                            <select name="tipos[]" class="form-select" id="tipos"
+                                aria-label="Floating label select example">
                                 @foreach($tipos as $id => $tipo)
-                                    <option value="{{ $id }}"{{ in_array($id, old('tipos', [])) ? ' selected' : '' }}>{{ $tipo }}</option>
+                                    <option value="{{ $id }}"{{ in_array($id, old('tipos', $propiedad->tipos->pluck('id')->toArray())) ? ' selected' : '' }}>
+                                        {{ $tipo }}
+                                    </option>
                                 @endforeach
                             </select>
                             <label for="floatingSelect">Tipo</label>

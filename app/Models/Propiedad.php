@@ -10,4 +10,13 @@ class Propiedad extends Model
     use HasFactory;
     protected $table = 'propiedades';
     protected $fillable = ['name','description','address_id','price','rooms','beds','baths','tipo'];
+
+    public function address()
+    {
+        return $this->belongsToMany(Address::class);
+    }
+    public function tipos()
+    {
+        return $this->belongsToMany(Tipo::class);
+    }
 }

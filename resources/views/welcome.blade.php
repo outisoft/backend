@@ -19,21 +19,23 @@
                     <div class="swiper-slide">
                         <div class="property-list shadow">
                             <div class="image">
-                                <img src="{{ asset($propiedad->img1)}}" alt="">
+                                <img src="{{ asset($propiedad->img1)}}" alt="{{ $propiedad->title }}">
                             </div>
                             <div class="text-right">
-                                <h4 class="h5">$10,965</h4>
+                                <h4 class="h5">${{ $propiedad->price }}</h4>
                             </div>
                             <div class="d-flex justify-content-between mb-4">
                                 <div class="item">
-                                    <h4 class="h5 m-0">Place</h4>
-                                    <p class="m-0">City, Contry</p>
+                                    <h4 class="h5 m-0">{{ $propiedad->name }}</h4>
+                                    @foreach ($propiedad->address as $address)
+                                        <p class="m-0">{{ $address->state }}, {{ $address->city }}</p>
+                                    @endforeach
                                 </div>
                                 <div class="item d-flex aling-self-center">
                                     <i class="fas fa-bed mx-2 aling-self-center"></i>
-                                    <span class="mr-3">5</span>
+                                    <span class="mr-3">{{ $propiedad->beds }}</span>
                                     <i class="fas fa-bath mx-2 aling-self-center"></i>
-                                    <span>3</span>
+                                    <span>{{ $propiedad->baths }}</span>
                                 </div>
                             </div>
                         </div>

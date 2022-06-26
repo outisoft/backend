@@ -49,7 +49,7 @@
     <!--/Work Section Here -->
 
     <!--Feature Section Here-->
-    <!--@include('welcome.feature')-->
+    <@include('welcome.feature')>
     <!--/Feature Property Here-->
 
     <!--Testimonial Section Here-->

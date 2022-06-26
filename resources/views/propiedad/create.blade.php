@@ -22,11 +22,11 @@
                 <label for="floatingInput">Price</label>
             </div>
             <div class="form-floating mb-3">
-                <select name="address_id[]" class="form-select" id="address_id"
+                <select name="address[]" class="form-select" id="address"
                     aria-label="Floating label select example">
                     <option selected>Direccion</option>
                     @foreach($address as $id => $direccion)
-                        <option value="{{ $id }}"{{ in_array($id, old('address_id', [])) ? ' selected' : '' }}>{{ $direccion }}</option>
+                        <option value="{{ $id }}"{{ in_array($id, old('address', [])) ? ' selected' : '' }}>{{ $direccion }}</option>
                     @endforeach
                 </select>
                 <label for="floatingSelect">Address</label>
@@ -74,7 +74,7 @@
             </div>
 
             <div class="form-floating mb-3">
-                <select name="tipo[]" class="form-select" id="tipo"
+                <select name="tipos[]" class="form-select" id="tipos"
                     aria-label="Floating label select example">
                     <option selected>Tipo</option>
                     @foreach($tipos as $tipo)
@@ -83,12 +83,70 @@
                 </select>
                 <label for="floatingSelect">Tipo</label>
             </div>
-            <div class="mb-3">
-                <label for="formFileSm" class="form-label">Imagen 1</label>
-                <input name="img1" class="form-control form-control-sm" id="img1" type="file">
+            <div class="form-group">
+                <label for="">First image</label>
+                <input id="img1" type="file" name="img1" class="form-control">
+                <span class="text-danger error-text product_image_error"></span>
             </div>
+            <div class="img-holder"></div>
             <button type="submit" class="btn btn-primary">Save</button>
         </form>
     </div>
 </div>
+
+
 @endsection
+<script>
+    $(function(){
+        $('#form').on('submit', function(e){
+            e.preventDefault();
+            var form = this;
+            $.ajax({
+                url:$(form).attr('action'),
+                method:$(form).attr('method'),
+                data:new FormData(form),
+                processData:false,
+                dataType:'json',
+                contentType:false,
+                beforeSend:function(){
+                    $(form).find('span.error-text').text('');
+                },
+                success:function(data){
+                    if(data.code == 0){
+                        $.each(data.error, function(prefix,val){
+                            $(form).find('span.'+prefix+'_error').text(val[0]);
+                        });
+                    }else{
+                        $(form)[0].reset();
+                        // alert(data.msg);
+                        fetchAllProducts();
+                    }
+                }
+            });
+        });
+        //Reset input file
+        $('input[type="file"][name="img1"]').val('');
+        //Image preview
+        $('input[type="file"][name="img1"]').on('change', function(){
+            var img_path = $(this)[0].value;
+            var img_holder = $('.img-holder');
+            var extension = img_path.substring(img_path.lastIndexOf('.')+1).toLowerCase();
+            if(extension == 'jpeg' || extension == 'jpg' || extension == 'png'){
+                    if(typeof(FileReader) != 'undefined'){
+                        img_holder.empty();
+                        var reader = new FileReader();
+                        reader.onload = function(e){
+                            $('<img/>',{'src':e.target.result,'class':'img-fluid','style':'max-width:100px;margin-bottom:10px;'}).appendTo(img_holder);
+                        }
+                        img_holder.show();
+                        reader.readAsDataURL($(this)[0].files[0]);
+                    }else{
+                        $(img_holder).html('This browser does not support FileReader');
+                    }
+            }else{
+                $(img_holder).empty();
+            }
+        });
+
+    })
+</script>

@@ -11,4 +11,9 @@ class Address extends Model
     protected $table = 'address';
     protected $fillable = ['streetName','streetNumber','neighborhood','zipCode','reference','country','state','city'];
 
+    public function propiedad()
+    {
+        return $this->belongsTo(Propiedad::class);
+    }
+
 }
