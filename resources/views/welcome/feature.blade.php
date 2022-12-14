@@ -30,6 +30,10 @@
                             <span>{{ $propiedad->baths }}</span>
                         </div>
                     </div>
+                    <div>
+                        <i class="fas fa-eye mx-2 aling-self-center"></i>
+                        <a href="#">See more... <i class="fas fa-long-arrow-alt-right ml-4"></i></a>
+                    </div>
                 </div>
             </div>
         @endforeach

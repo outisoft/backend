@@ -17,8 +17,6 @@
             <a href="{{ route('home') }}" active="request()->routeIs('home')" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
             <a href="{{ url('users') }}" class="nav-item nav-link"><i class="fa fa-user me-2"></i>Users</a>
             <a href="{{ url('propiedad') }}" active="request()->routeIs('propiedad')" class="nav-item nav-link"><i class="fa fa-home me-2"></i>Propiedades</a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-            <a href="#" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
         </div>
     </nav>
 </div>

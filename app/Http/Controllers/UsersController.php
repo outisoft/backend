@@ -21,6 +21,10 @@ class UsersController extends Controller
 
         return view('user.index', compact('users'));
     }
+    public function perfil()
+    {
+        return view('user.perfil');
+    }
 
     public function create()
     {

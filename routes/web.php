@@ -7,16 +7,6 @@ use App\Models\Role;
 use App\Models\Propiedad;
 use App\Models\Address;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     //User::with(['company', 'employee.department', 'employee.gradelevel'])->get();
@@ -28,7 +18,8 @@ Route::get('/', function () {
 });
 
 Route::get('/welcome', function () {
-    return view('welcome');
+    $propiedades = Propiedad::with('address')->get();
+    return view('welcome', compact('propiedades'));
 })->middleware(['auth'])->name('welcome');
 
 Route::get('/home', function () {
@@ -44,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('propiedad', \App\Http\Controllers\PropiedadController::class);
 
     Route::resource('address', \App\Http\Controllers\AddressController::class);
+
+    Route::resource('reserva', \App\Http\Controllers\ReservaController::class);
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->resource('/user', 'App\Http\Controllers\UserController', ['except'=>['create','store']])->names('user');

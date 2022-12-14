@@ -28,7 +28,7 @@
     <!--/Hero Banner Here-->
 
     <!--Search section Here-->
-    @include('welcome.search')
+    <!--@include('welcome.search')-->
     <br>
     <!--/Search section Here-->
 
